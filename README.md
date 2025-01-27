@@ -1,3 +1,4 @@
+```
 Table Listing {
   id pk
   title char
@@ -43,3 +44,4 @@ ref: Listing.subcategory < Subcategory.id
 ref: Subcategory.category < Category.id
 ref: Listing.created_by < User.id
 ref: Listing.payments_accepted <> PaymentType.id
+```
