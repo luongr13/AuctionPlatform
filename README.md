@@ -1,3 +1,5 @@
+![alt text](https://github.com/luongr13/AuctionPlatform/blob/main/diagram.png)
+
 ```
 Table Listing {
   id pk
