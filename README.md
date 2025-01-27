@@ -1,30 +1,45 @@
-# AuctionPlatform
+Table Listing {
+  id pk
+  title char
+  description textfield
+  qty integer
+  view_count integer
+  aw_price decimal
+  min_price decimal
+  created_by foreignkey(User)
+  start datetime
+  end datetime
+  origin_address char
+  destination_address char
+  status choices("open", "closed", "archived")
+  returns_accepted boolean
+  return_conditions choices('closed_box', 'open_box', 'not available')
+  return_window datetime
+  subcategory foreignkey(Subcategory)
+  payments_accepted manytomany(PaymentType)
+}
 
-## Listing Model
-- title_cf: CharField
-- created_by_fk: fk->User
-- start_dtf: DateTime
-- end_dtf: DateTime
-- qty_if: IntegerField
-- view_count:_if: IntegerField
-- aw_price_df: DecimalField
-- min_price_df: DecimalField
-- origin_address_cf: CharField
-- status_cf: Choices["open", "closed", "archived"]
-- returns_accepted_bf: BooleanField
-- subcategory_fk: fk->Subcategory
+Table PaymentType {
+  id pk
+  name char
+}
 
-## Sublisting
-- listing_fk: fk->Listing
-- qty_if: IntegerField 
+Table Subcategory {
+  id pk
+  name char
+  category foreignnkey(Category)
+}
 
-## ListingVariation
-- name_cf: CharField
-- subcategory_fk: fk->Subcategory
+Table Category {
+  id pk
+  name char
+}
 
-## Subcategory Model
-- name_cf: CharField
-- category_fk: fk->Category
+Table User {
+  id pk
+}
 
-## Category Model
-- name_cf: CharField
+ref: Listing.subcategory < Subcategory.id
+ref: Subcategory.category < Category.id
+ref: Listing.created_by < User.id
+ref: Listing.payments_accepted <> PaymentType.id
